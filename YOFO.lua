@@ -204,6 +204,7 @@ yofo.presets_menu = menu.new {
         }, {
             name = "Save",
             help = "Save current settings to SD card",
+            icon_type = ICON_TYPE.ACTION,
             update = function(this) return "" end
         }
     },
