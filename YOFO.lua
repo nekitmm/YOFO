@@ -117,6 +117,24 @@ end
 
 ----------------------------- goto menu ---------------------------------------
 
+function gotoRGB()
+    local preset = yofo.presets_menu.submenu["RGB"].value
+    menu.close()
+    if not lv.running then lv.start() end
+    move_focus(preset)
+    lv.stop()
+    menu.open()
+end
+
+function gotoHa()
+    local preset = yofo.presets_menu.submenu["Ha"].value
+    menu.close()
+    if not lv.running then lv.start() end
+    move_focus(preset)
+    lv.stop()
+    menu.open()
+end
+
 yofo.goto_menu = menu.new {
     parent = "Focus",
     name = "YOFO Goto",
@@ -129,31 +147,18 @@ yofo.goto_menu = menu.new {
             update = function(this)
                 return yofo.presets_menu.submenu["RGB"].value
             end,
-            depends_on = DEPENDS_ON.LIVEVIEW
+            select = function(this) task.create(gotoRGB) end
         }, {
             name = "Ha",
             help = "Infinity point for Hydrogen filter",
             update = function(this)
                 return yofo.presets_menu.submenu["Ha"].value
             end,
-            depends_on = DEPENDS_ON.LIVEVIEW
+            select = function(this) task.create(gotoHa) end
         }
     },
-    depends_on = DEPENDS_ON.LIVEVIEW,
     update = function(this) return "" end
 }
-
-yofo.goto_menu.submenu["RGB"].select = function(this)
-    local preset = yofo.presets_menu.submenu["RGB"].value
-    local current = yofo.current_position
-    move_focus(preset)
-end
-
-yofo.goto_menu.submenu["Ha"].select = function(this)
-    local preset = yofo.presets_menu.submenu["Ha"].value
-    local current = yofo.current_position
-    move_focus(preset)
-end
 
 ----------------------------- presets menu ------------------------------------
 
