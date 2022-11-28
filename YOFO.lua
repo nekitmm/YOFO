@@ -1,5 +1,11 @@
 -- YOFO
 -- Repeatable astro focusing
+------------------------------ constants --------------------------------------
+_MAX_POS = 1000
+_PRESETS_FILENAME = "ML/SCRIPTS/yofo_settings/presets.lua"
+_SCAN_LOG_FILENAME = "ML/SCRIPTS/yofo_scans/scan_logs.lua"
+_TEST_LOG_FILENAME = "ML/LOGS/YOFOTEST.LOG"
+----------------------------- helpers -----------------------------------------
 function table.save(t, f)
     -- by @marcotrosi
     -- saves table t into file f
@@ -47,7 +53,7 @@ end
 
 function table:load()
 
-    local settings = loadfile("ML/SCRIPTS/yofo_settings/presets.lua")
+    local settings = loadfile(_PRESETS_FILENAME)
     local default = {["RGB"] = 0, ["Ha"] = 0}
 
     if not settings then
@@ -60,11 +66,43 @@ function table:load()
     return settings
 end
 
-function saveFile(settings)
-    table.save(settings, "ML/SCRIPTS/yofo_settings/presets.lua")
+function saveFile(settings) table.save(settings, _PRESETS_FILENAME) end
+
+function printf(s, ...)
+    test_log:writef(s, ...)
+    if not console.visible then display.notify_box(s:format(...), 5000) end
 end
 
-function focus(current, position)
+function request_mode(mode, mode_str)
+    if camera.mode ~= mode or not camera.gui.idle then
+        printf("Please switch to %s mode.\n", mode_str, mode)
+
+        while camera.mode ~= mode or not camera.gui.idle do
+            console.show();
+            assert(console.visible)
+            if camera.gui.idle then alert() end
+            sleep(1)
+        end
+    end
+    sleep(2)
+end
+
+----------------------------- body -----------------------------------------
+
+require("logger")
+test_log = nil
+test_log = logger(_TEST_LOG_FILENAME)
+
+scan_log = nil
+
+yofo = {}
+yofo.value = ""
+yofo.presets = {"RGB", "Ha"}
+yofo.num_presets = #(yofo.presets)
+yofo.settings = table.load()
+yofo.current_position = 0
+
+function move_focus(steps)
     if not lv.running then
         print("Please turn on LiveView first!")
         return
@@ -73,22 +111,11 @@ function focus(current, position)
         print("Please turn on Autofocus!")
         return
     end
-    print("Moving to " .. position .. ".")
-    print("Do not touch the focus ring, this may take a while.")
-    lens.focus(position, 1, true, true)
-    print("You can now disable autofocus!")
-
-    return position
+    print("Moving to " .. steps .. ".")
+    lens.focus(steps, 1, true, true)
 end
 
--- body -----------------------------------------------------------------------------
-
-yofo = {}
-yofo.value = ""
-yofo.presets = {"RGB", "Ha"}
-yofo.num_presets = #(yofo.presets)
-yofo.settings = table.load()
-yofo.current_position = 0
+----------------------------- goto menu ---------------------------------------
 
 yofo.goto_menu = menu.new {
     parent = "Focus",
@@ -116,6 +143,20 @@ yofo.goto_menu = menu.new {
     update = function(this) return "" end
 }
 
+yofo.goto_menu.submenu["RGB"].select = function(this)
+    local preset = yofo.presets_menu.submenu["RGB"].value
+    local current = yofo.current_position
+    move_focus(preset)
+end
+
+yofo.goto_menu.submenu["Ha"].select = function(this)
+    local preset = yofo.presets_menu.submenu["Ha"].value
+    local current = yofo.current_position
+    move_focus(preset)
+end
+
+----------------------------- presets menu ------------------------------------
+
 yofo.presets_menu = menu.new {
     parent = "Focus",
     name = "YOFO Presets",
@@ -125,7 +166,7 @@ yofo.presets_menu = menu.new {
             name = "RGB",
             help = "Infinity point for RGB frames",
             min = 0,
-            max = 500,
+            max = _MAX_POS,
             value = yofo.settings[lens.name]["RGB"],
             warning = function(this)
                 if this.value ~= yofo.settings[lens.name]["RGB"] then
@@ -142,7 +183,7 @@ yofo.presets_menu = menu.new {
             name = "Ha",
             help = "Infinity point for Hydrogen filter",
             min = 0,
-            max = 500,
+            max = _MAX_POS,
             value = yofo.settings[lens.name]["Ha"],
             warning = function(this)
                 if this.value ~= yofo.settings[lens.name]["Ha"] then
@@ -164,34 +205,6 @@ yofo.presets_menu = menu.new {
     update = function(this) return "" end
 }
 
------ focus position menu --------------------------
-
-yofo.focus_menu = menu.new {
-    parent = "Focus",
-    name = "YOFO Position",
-    help = "Current absolute focuser motor position",
-    warning = function(this) return "Trust with care!" end,
-    update = function(this) return yofo.current_position end
-}
-yofo.focus_menu.select = function(this)
-    local s = menu.get("Focus", "Focus End Point")
-    print("String:" .. s)
-    local offset = 0
-    if s ~= "0 (here)" then
-        local sign, value = s:match("(.)(%d+).+")
-        print("Match: " .. sign .. value)
-        if sign == "-" then
-            offset = -tonumber(value)
-        else
-            offset = tonumber(value)
-        end
-    end
-    print("Final offset: " .. offset)
-    this.rinfo = "-> " .. (yofo.current_position + offset)
-end
-
------ presets menu --------------------------------
-
 yofo.presets_menu.submenu["Save"].select = function(this)
     local lens_settings = {
         ["RGB"] = yofo.presets_menu.submenu["RGB"].value,
@@ -201,20 +214,115 @@ yofo.presets_menu.submenu["Save"].select = function(this)
     settings[lens.name] = lens_settings
 
     saveFile(settings)
-
     this.update = "Done!"
 end
 
-------- goto menu -------------------------------------
+----------------------------- scan menu ---------------------------------------
 
-yofo.goto_menu.submenu["RGB"].select = function(this)
-    local preset = yofo.presets_menu.submenu["RGB"].value
-    local current = yofo.current_position
-    yofo.current_position = focus(current, preset)
+function run_scan()
+    print("Scan start...")
+
+    scan_log = logger(_SCAN_LOG_FILENAME)
+
+    menu.close()
+
+    local start_pos = yofo.scan_menu.submenu["Start"].value
+    local end_pos = yofo.scan_menu.submenu["End"].value
+    local step = yofo.scan_menu.submenu["Step"].value
+
+    local image_path = nil
+    local image_prefix = nil
+    local position = 0
+    local num_frames = (end_pos - start_pos) // step + 1
+    local curr_frame = 0
+
+    dryos.image_prefix = "YOF_"
+
+    if not lv.running then lv.start() end
+    move_focus(start_pos)
+    yofo.current_position = start_pos
+
+    position = start_pos
+    while position <= end_pos do
+        curr_frame = curr_frame + 1
+        print("Scanning position " .. position .. "!")
+
+        image_path = dryos.shooting_card:image_path(1)
+        scan_log:writef(image_path .. " " .. position .. "\n")
+
+        camera.shoot(false)
+        lv.start()
+        print("Moving to the next step!")
+        position = position + step
+        move_focus(step)
+        yofo.current_position = position
+    end
+
+    dryos.image_prefix = ""
+    lv.stop()
+    display.on()
+    menu.open()
+    scan_log:close()
 end
 
-yofo.goto_menu.submenu["Ha"].select = function(this)
-    local preset = yofo.presets_menu.submenu["Ha"].value
-    local current = yofo.current_position
-    yofo.current_position = focus(current, preset)
+yofo.scan_menu = menu.new {
+    parent = "Focus",
+    name = "YOFO Scan",
+    help = "Scan through range to find best position",
+    submenu = {
+        {
+            name = "Start",
+            help = "Starting position",
+            min = 0,
+            max = _MAX_POS,
+            value = 0,
+            unit = UNIT.DEC
+        }, {
+            name = "End",
+            help = "End position, must be greater than Start",
+            min = 0,
+            max = _MAX_POS,
+            value = 30,
+            unit = UNIT.DEC
+        }, {
+            name = "Step",
+            help = "Interval step",
+            min = 1,
+            max = 100,
+            value = 10,
+            unit = UNIT.DEC
+        }, {
+            name = "Run",
+            help = "Run scan using current settings",
+            update = function(this) return "" end,
+            select = function(this) task.create(run_scan) end
+        }
+    },
+    depends_on = DEPENDS_ON.AUTOFOCUS,
+    update = function(this) return "" end
+}
+
+----------------------- focus position menu -----------------------------------
+
+yofo.focus_menu = menu.new {
+    parent = "Focus",
+    name = "YOFO Position*",
+    help = "Current absolute focuser motor position",
+    warning = function(this) return "*Trust with care!" end,
+    update = function(this) return yofo.current_position end
+}
+yofo.focus_menu.select = function(this)
+    local s = menu.get("Focus", "Focus End Point")
+    local offset = 0
+
+    if s ~= "0 (here)" then
+        local sign, value = s:match("(.)(%d+).+")
+        if sign == "-" then
+            offset = -tonumber(value)
+        else
+            offset = tonumber(value)
+        end
+    end
+    this.rinfo = "-> " .. (yofo.current_position + offset)
 end
+
