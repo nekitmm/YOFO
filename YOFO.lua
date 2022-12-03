@@ -1,10 +1,12 @@
 -- YOFO
 -- Repeatable astro focusing
 ------------------------------ constants --------------------------------------
-_MAX_POS = 1000
+_MAX_POS = 2000 -- max alowed position of the focuser in steps from hard limit
 _PRESETS_FILENAME = "ML/SCRIPTS/yofo_settings/presets.lua"
 _SCAN_LOG_FILENAME = "ML/SCRIPTS/yofo_scans/scan_logs.lua"
 _TEST_LOG_FILENAME = "ML/LOGS/YOFOTEST.LOG"
+_YOFO_IMG_PREFIX = "YOF_" -- change to empty string to disable
+
 ----------------------------- helpers -----------------------------------------
 function table.save(t, f)
     -- by @marcotrosi
@@ -147,16 +149,19 @@ yofo.goto_menu = menu.new {
             update = function(this)
                 return yofo.presets_menu.submenu["RGB"].value
             end,
-            select = function(this) task.create(gotoRGB) end
+            select = function(this) task.create(gotoRGB) end,
+            depends_on = DEPENDS_ON.AUTOFOCUS
         }, {
             name = "Ha",
             help = "Infinity point for Hydrogen filter",
             update = function(this)
                 return yofo.presets_menu.submenu["Ha"].value
             end,
-            select = function(this) task.create(gotoHa) end
+            select = function(this) task.create(gotoHa) end,
+            depends_on = DEPENDS_ON.AUTOFOCUS
         }
     },
+    depends_on = DEPENDS_ON.AUTOFOCUS,
     update = function(this) return "" end
 }
 
@@ -242,7 +247,7 @@ function run_scan()
     local num_frames = (end_pos - start_pos) // step + 1
     local curr_frame = 0
 
-    dryos.image_prefix = "YOF_"
+    dryos.image_prefix = _YOFO_IMG_PREFIX
 
     if not lv.running then lv.start() end
     move_focus(start_pos)
@@ -257,6 +262,9 @@ function run_scan()
         scan_log:writef(image_path .. " " .. position .. "\n")
 
         camera.shoot(false)
+
+        if position == end_pos then break end
+
         lv.start()
         print("Moving to the next step!")
         position = position + step
