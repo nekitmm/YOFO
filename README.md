@@ -4,7 +4,7 @@
 
 YOFO: You Only Focus Once
 
-YOFO is a script for Magic Lantern that allows you to use your lens' internal focusing motor to achieve precise and repeatable focus on infinity.
+YOFO is a script for [Magic Lantern](https://www.magiclantern.fm/) that allows you to use your lens' internal focusing motor to achieve precise and repeatable focus at infinity.
 
 The short idea is: you move your lens to hard stop beyond infinity, count how many steps it takes your focusing motor to get to infinity and save this value. After that, when you are in the field, you can achieve perfect focus in just a few simple steps:
 
@@ -19,7 +19,7 @@ At the moment this procedure assumes that the focusing point does not depend on 
 
 ## Installation and dependencies
 
-Dependencies: This script requires the latest experimental version of Magic Lantern (2020-12-28 18:15), which you can find here.
+Dependencies: This script requires the **latest experimental version of Magic Lantern (2020-12-28 18:15)**, which you can find [here](https://builds.magiclantern.fm/experiments.html).
 
 Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
