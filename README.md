@@ -30,7 +30,7 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
     Magic Lantern is not officially supported by Canon and in principle can damage or even brick your camera.
     Be sure you know what you are doing before proceeding!
 
----
+## 
 
 1. First install Magic Lantern (ML). Refer to instructions elsewhere to find out how.
 2. Open **ML/scripts** folder on your SD or CF card and copy **YOFO.lua** script there.
