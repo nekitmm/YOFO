@@ -24,7 +24,7 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
 ## DISCLAIMER THAT YOU SHOULD READ AND TAKE SERIOUSLY:
 
     This software is provided as-is without any guaranties.
-    I am absolutely not responsible any damage caused by Magic Lantern or this script.
+    I am absolutely not responsible for any damage caused by Magic Lantern or this script.
     Magic Lantern is not officially supported by Canon and in principle can damage or even brick your camera.
     Check if your camera is compatible with Magic Lantern first.
     Be sure you know what you are doing before proceeding!
