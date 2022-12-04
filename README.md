@@ -1,8 +1,8 @@
 <br/>
 <h1 align="center">YOFO</h1>
-<h2 align="center">YOFO: You Only Focus Once</h2>
 <br/>
 
+YOFO: You Only Focus Once
 
 YOFO is a script for Magic Lantern that allows you to use your lens' internal focusing motor to achieve precise and repeatable focus on infinity.
 
