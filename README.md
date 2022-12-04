@@ -21,7 +21,7 @@ At the moment this procedure assumes that the focusing point does not depend on 
 
 Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
-## DISCLAIMER
+## DISCLAIMER THAT YOU SHOULD READ AND TAKE SERIOUSLY:
 
     This software is provided as-is without any guaranties.
     I am absolutely not responsible any damage caused by Magic Lantern or this script.
