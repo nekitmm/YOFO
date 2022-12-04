@@ -20,7 +20,7 @@ Dependencies: This script requires the latest experimental version of Magic Lant
 
 Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
-### Disclaimer: The software is provided as-is without any guaranties. I am absolutely not responsible any damage caused by Magic Lantern or this script. Magic Lantern is not officially supported by Canon and in pronciple can damage or even brick your camera. Be sure you know what you are doing before proceeding!
+    *Disclaimer: The software is provided as-is without any guaranties. I am absolutely not responsible any damage caused by Magic Lantern or this script. Magic Lantern is not officially supported by Canon and in pronciple can damage or even brick your camera. Be sure you know what you are doing before proceeding!*
 
 1. First install Magic Lantern (ML). Refer to instructions elsewhere to find out how.
 2. Open ML/scripts folder on your SD or CF card and copy YOFO.lua script there.
