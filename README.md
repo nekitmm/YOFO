@@ -17,9 +17,9 @@ The short idea is: you move your lens to hard stop beyond infinity, count how ma
 
 At the moment this procedure assumes that the focusing point does not depend on the temperature, which should be tested, but probably true for most lens, except telephoto ones.
 
-## Installation and dependencies
+## Installation
 
-Dependencies: This script requires the **latest experimental version of Magic Lantern (2020-12-28 18:15)**, which you can find [here](https://builds.magiclantern.fm/experiments.html).
+**Dependencies:** This script requires the **latest experimental version of Magic Lantern (2020-12-28 18:15)**, which you can find [here](https://builds.magiclantern.fm/experiments.html).
 
 Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
