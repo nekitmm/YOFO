@@ -29,6 +29,6 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
 <br/>
 <p align="center">
-    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/screenshots/VRAM10.jpg" alt="YOFO installed into Focus menu">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/tree/main/screenshots/VRAM10.jpg" alt="YOFO installed into Focus menu">
 </p>
 <br/>
