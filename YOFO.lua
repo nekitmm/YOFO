@@ -119,22 +119,23 @@ end
 
 ----------------------------- goto menu ---------------------------------------
 
-function gotoRGB()
-    local preset = yofo.presets_menu.submenu["RGB"].value
+function _goto(preset)
     menu.close()
     if not lv.running then lv.start() end
     move_focus(preset)
+    yofo.current_position = preset
     lv.stop()
     menu.open()
 end
 
+function gotoRGB()
+    local preset = yofo.presets_menu.submenu["RGB"].value
+    _goto(preset)
+end
+
 function gotoHa()
     local preset = yofo.presets_menu.submenu["Ha"].value
-    menu.close()
-    if not lv.running then lv.start() end
-    move_focus(preset)
-    lv.stop()
-    menu.open()
+    _goto(preset)
 end
 
 yofo.goto_menu = menu.new {
