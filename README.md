@@ -45,13 +45,45 @@ Note that in the menu above I hid some of the menu items that I don't need, you 
 
 First, it is a good idea to set up Focus Settings in ML:
 
-* Follow focus should be set on **Follow Focus**. This will allow you to tweak your focuser position in the live mode by hitting left and rigt buttons on your camera's wheel (the one around Set button on the right of the screen in case of 6D)
+* Follow focus should be set on **Follow Focus**. This will allow you to tweak your focuser position in the live mode by hitting left and rigt buttons on your camera's wheel (the one around Set button on the right of the screen in case of 6D). As you tweak the focus, the **Focus End Point** with show how many steps you went left or right using these buttons. This will help you to determine the focus point for your presets.
 * Here are my settings for Focus Settings Items:
 
 <br/>
 <p align="center">
-    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM20.jpg" alt="YOFO installed into Focus menu">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM20.jpg" alt="Focus Settings menu">
 </p>
 <br/>
 
-What is the most important is setting the **Step Size** to 1. If for some reason Step Size of 1 does not work for you, you can leave 2 or 3, but be sure to change _STEP_SIZE constant in the script to have the same value.
+* The most important setting is the **Step Size**, which should ideally be set to 1 (smallest step). If for some reason Step Size of 1 does not work for you, you can leave 2 or 3, but be sure to change **_STEP_SIZE** constant in the *YOFO.lua* script to have the same value.
+
+Now, the YOFO menu.
+
+* **YOFO Goto**. This is the menu that will allow you to activate presets. For now the script has two presets: **RGB** and **Ha**. They will have the values that you will set in **YOLO Presets** menu. **IMPORTANT NOTE: Allways move your focusing ring to the hard stop beyond infinity before activating presets.**
+
+* **YOFO Presets**. This is the menu that will allow you to save the focusing points that you have found either manually (using **Follow Focus** I described above) or using **YOFO Scan** I will describe below. If you open this menu, you will have options to change preset values and then save then into the memory card to persist. If you won't save the values, they will only live untill you restart the camera. **Note:** these presets will be saved and loaded for each individual lens, so every time you put a new lens you be able to create new presets. And, of course, when you will put on a lens that have presets, they will be loaded back. This way you can have presets for all the lens you have and they will be loaded automatically every time you switch. Here is how this menu looks like:
+
+<br/>
+<p align="center">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM30.jpg" alt="YOFO Presets menu">
+</p>
+<br/>
+
+* **YOFO Scan**. This menu allows you to find the best focus point to put into presets. The way this work is easy: you put your lens to hard stop beyond infinity, activate AF and run the scan. The scan settings have starting point, end point and step size. After you hit "Run", the camera will move through a number of positions you have specified and take pictures at each and every one of them. You will only need to look through the images and select the one with the best focus. Here is how this menu looks like:
+
+<br/>
+<p align="center">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM48.jpg" alt="YOFO Scan menu">
+</p>
+<br/>
+
+As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/scan_logs.lua** file with the information about images taken with corresponding focuser positions:
+
+<br/>
+<p align="center">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/scan_logs.jpg" alt="YOFO Scan Logs">
+</p>
+<br/>
+
+So you can analyze these images later in the compfort fo your home.
+
+That's about it! Happy focusing! If you find this script useful, I would like you to mention it, for example in your software list on Astrobin.
