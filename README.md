@@ -25,7 +25,7 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
 
     Disclaimer: The software is provided as-is without any guaranties.
     I am absolutely not responsible any damage caused by Magic Lantern or this script.
-    Magic Lantern is not officially supported by Canon and in pronciple can damage or even brick your camera.
+    Magic Lantern is not officially supported by Canon and in principle can damage or even brick your camera.
     Be sure you know what you are doing before proceeding!
 
 1. First install Magic Lantern (ML). Refer to instructions elsewhere to find out how.
@@ -45,7 +45,7 @@ Note that in the menu above I hid some of the menu items that I don't need, you 
 
 First, it is a good idea to set up Focus Settings in ML:
 
-* Follow focus should be set on **Follow Focus**. This will allow you to tweak your focuser position in the live mode by hitting left and rigt buttons on your camera's wheel (the one around Set button on the right of the screen in case of 6D). As you tweak the focus, the **Focus End Point** with show how many steps you went left or right using these buttons. This will help you to determine the focus point for your presets.
+* Follow focus should be set on **Follow Focus**. This will allow you to tweak your focuser position in the live mode by hitting left and right buttons on your camera's wheel (the one around Set button on the right of the screen in case of 6D). As you tweak the focus, the **Focus End Point** with show how many steps you went left or right using these buttons. This will help you to determine the focus point for your presets.
 * Here are my settings for Focus Settings Items:
 
 <br/>
@@ -58,9 +58,9 @@ First, it is a good idea to set up Focus Settings in ML:
 
 Now, the YOFO menu.
 
-* **YOFO Goto**. This is the menu that will allow you to activate presets. For now the script has two presets: **RGB** and **Ha**. They will have the values that you will set in **YOLO Presets** menu. **IMPORTANT NOTE: Allways move your focusing ring to the hard stop beyond infinity before activating presets.**
+* **YOFO Goto**. This is the menu that will allow you to activate presets. For now the script has two presets: **RGB** and **Ha**. They will have the values that you will set in **YOFO Presets** menu. **IMPORTANT NOTE: Always move your focusing ring to the hard stop beyond infinity before activating presets.**
 
-* **YOFO Presets**. This is the menu that will allow you to save the focusing points that you have found either manually (using **Follow Focus** I described above) or using **YOFO Scan** I will describe below. If you open this menu, you will have options to change preset values and then save then into the memory card to persist. If you won't save the values, they will only live untill you restart the camera. **Note:** these presets will be saved and loaded for each individual lens, so every time you put a new lens you be able to create new presets. And, of course, when you will put on a lens that have presets, they will be loaded back. This way you can have presets for all the lens you have and they will be loaded automatically every time you switch. Here is how this menu looks like:
+* **YOFO Presets**. This is the menu that will allow you to save the focusing points that you have found either manually (using **Follow Focus** I described above) or using **YOFO Scan** I will describe below. If you open this menu, you will have options to change preset values and then save then into the memory card to persist. If you won't save the values, they will only live until you restart the camera. **Note:** these presets will be saved and loaded for each individual lens, so every time you put a new lens you be able to create new presets. And, of course, when you will put on a lens that have presets, they will be loaded back. This way you can have presets for all the lens you have and they will be loaded automatically every time you switch. Here is how this menu looks like:
 
 <br/>
 <p align="center">
@@ -84,7 +84,7 @@ As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/s
 </p>
 <br/>
 
-So you can analyze these images later in the compfort fo your home.
+So you can analyze these images later in the comfort of your home.
 
 ## That's about it!
 
