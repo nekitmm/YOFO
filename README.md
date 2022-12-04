@@ -68,7 +68,7 @@ Now, the YOFO menu.
 </p>
 <br/>
 
-* **YOFO Scan**. This menu allows you to find the best focus point to put into presets. The way this work is easy: you put your lens to hard stop beyond infinity, activate AF and run the scan. The scan settings have starting point, end point and step size. After you hit "Run", the camera will move through a number of positions you have specified and take pictures at each and every one of them. You will only need to look through the images and select the one with the best focus. Here is how this menu looks like:
+* **YOFO Scan**. This menu allows you to find the best focus point to put into **YOFO presets**. The way this works is super easy: you **put your lens to hard stop beyond infinity**, activate AF and run the scan. The scan settings include starting point, end point and step size. After you hit **Run**, the camera will move through a number of positions you have specified and take pictures at each and every one of them. You will only need to look through the images and select the one with the best focus. Here is how this menu looks like:
 
 <br/>
 <p align="center">
@@ -76,7 +76,7 @@ Now, the YOFO menu.
 </p>
 <br/>
 
-As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/scan_logs.lua** file with the information about images taken with corresponding focuser positions:
+As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/scan_logs.lua** file with information about images taken and corresponding focuser positions:
 
 <br/>
 <p align="center">
@@ -88,4 +88,4 @@ So you can analyze these images later in the compfort fo your home.
 
 ## That's about it!
 
-**Happy focusing! If you find this script useful, I would like you to mention it, for example in your software list on Astrobin.**
+**Happy focusing! If you find this script useful, I would highly appreciate you to mentioning it, for example in your software list on Astrobin.**
