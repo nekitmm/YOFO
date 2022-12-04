@@ -6,6 +6,7 @@ _PRESETS_FILENAME = "ML/SCRIPTS/yofo_settings/presets.lua"
 _SCAN_LOG_FILENAME = "ML/SCRIPTS/yofo_scans/scan_logs.lua"
 _TEST_LOG_FILENAME = "ML/LOGS/YOFOTEST.LOG"
 _YOFO_IMG_PREFIX = "YOF_" -- change to empty string to disable
+_STEP_SIZE = 1
 
 ----------------------------- helpers -----------------------------------------
 function table.save(t, f)
@@ -114,7 +115,7 @@ function move_focus(steps)
         return
     end
     print("Moving to " .. steps .. ".")
-    lens.focus(steps, 1, true, true)
+    lens.focus(steps, _STEP_SIZE, true, true)
 end
 
 ----------------------------- goto menu ---------------------------------------

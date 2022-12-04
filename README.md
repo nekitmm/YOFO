@@ -29,7 +29,7 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
     Be sure you know what you are doing before proceeding!
 
 1. First install Magic Lantern (ML). Refer to instructions elsewhere to find out how.
-2. Open ML/scripts folder on your SD or CF card and copy YOFO.lua script there.
+2. Open **ML/scripts** folder on your SD or CF card and copy **YOFO.lua** script there.
 3. Load the card into the camera, go to Scripts menu of ML and activate the script by setting Autorun to ON.
 4. Restart your camera. The Focus menu should have YOFO items added:
 
@@ -38,3 +38,20 @@ Note that this is for Canon cameras. I only tested this on my Canon 6D.
     <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM10.jpg" alt="YOFO installed into Focus menu">
 </p>
 <br/>
+
+Note that in the menu above I hid some of the menu items that I don't need, you will see more menu items.
+
+## Usage
+
+First, it is a good idea to set up Focus Settings in ML:
+
+* Follow focus should be set on **Follow Focus**. This will allow you to tweak your focuser position in the live mode by hitting left and rigt buttons on your camera's wheel (the one around Set button on the right of the screen in case of 6D)
+* Here are my settings for Focus Settings Items:
+
+<br/>
+<p align="center">
+    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/VRAM20.jpg" alt="YOFO installed into Focus menu">
+</p>
+<br/>
+
+What is the most important is setting the **Step Size** to 1. If for some reason Step Size of 1 does not work for you, you can leave 2 or 3, but be sure to change _STEP_SIZE constant in the script to have the same value.
