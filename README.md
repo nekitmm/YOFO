@@ -80,7 +80,7 @@ As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/s
 
 <br/>
 <p align="center">
-    <img width="50%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/scan_logs.jpg" alt="YOFO Scan Logs">
+    <img width="70%" src="https://github.com/nekitmm/YOFO/blob/main/screenshots/scan_logs.jpg" alt="YOFO Scan Logs">
 </p>
 <br/>
 
