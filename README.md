@@ -86,4 +86,6 @@ As a nice bonus, the **YOFO Scan** will save logs into **ML/scripts/yofo_scans/s
 
 So you can analyze these images later in the compfort fo your home.
 
-That's about it! Happy focusing! If you find this script useful, I would like you to mention it, for example in your software list on Astrobin.
+## That's about it!
+
+**Happy focusing! If you find this script useful, I would like you to mention it, for example in your software list on Astrobin.**
